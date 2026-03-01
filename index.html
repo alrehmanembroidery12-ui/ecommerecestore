@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA | Premium Lifestyle Store</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #2E4035; 
+            --accent-color: #C89F70; 
+            --bg-color: #FAFAF8; 
+            --card-bg: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-light: #5A5A5A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        header {
+            background-color: var(--card-bg);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-icon {
+            text-decoration: none;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .cart-icon:hover {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(46, 64, 53, 0.6), rgba(46, 64, 53, 0.3)), 
+                        url('https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #EDEDED;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            padding: 16px 40px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(200, 159, 112, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+        }
+
+        /* --- Categories Section (With Background Images) --- */
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin: 90px 0 50px;
+            color: var(--primary-color);
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 0 5%;
+            margin-bottom: 90px;
+            flex-wrap: wrap;
+        }
+
+        .category-box {
+            background-size: cover;
+            background-position: center;
+            padding: 80px 30px; /* Thora bara kiya taake picture wazeh dikhe */
+            border-radius: 16px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: white; /* Text white kar diya taake picture par parha jaye */
+            border: 2px solid transparent;
+        }
+
+        .category-box:hover {
+            transform: translateY(-10px);
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 15px 40px rgba(46, 64, 53, 0.2);
+        }
+
+        .category-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.6); /* Text ko highlight karne ke liye shadow */
+        }
+
+        .category-box p {
+            color: #f1f1f1;
+            font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* --- Featured Products Grid --- */
+        .products-container {
+            padding: 0 5%;
+            margin-bottom: 120px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-info {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .add-to-cart {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .add-to-cart:hover {
+            background: var(--accent-color);
+            color: var(--text-dark);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 80px 5% 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 50px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--accent-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 15px;
+        }
+
+        /* Social Icons CSS Styling (Original Colors Applied) */
+        .footer-col ul li a {
+            color: #d1d1d1;
+            text-decoration: none;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1.05rem;
+        }
+
+        .footer-col ul li a i {
+            font-size: 1.4rem;
+            margin-right: 12px;
+            width: 25px;
+            text-align: center;
+        }
+
+        /* Setting Original Brand Colors */
+        .fa-whatsapp { color: #25D366; }
+        .fa-facebook { color: #1877F2; }
+        .fa-instagram { color: #E1306C; } /* Basic pink/red for Insta */
+        .fa-pinterest { color: #E60023; }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: #999;
+            font-size: 0.95rem;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .footer-content { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">AURA.</a>
+        <ul class="nav-menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Journal</a></li>
+        </ul>
+        <div class="header-icons">
+            <a href="#" class="cart-icon">Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Mindful Living Spaces</h1>
+            <p>Bring nature indoors with our premium, sustainable furniture. Designed for comfort, crafted for the planet.</p>
+            <a href="#products" class="btn-primary">Explore Designs</a>
+        </div>
+    </section>
+
+    <h2 class="section-title">Shop by Category</h2>
+    <div class="categories">
+        
+        <div class="category-box" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&q=80');">
+            <h3>Living & Lounge</h3>
+            <p>Sofas, coffee tables & seating</p>
+        </div>
+
+        <div class="category-box" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=600&q=80');">
+            <h3>Sleep Sanctuary</h3>
+            <p>Premium beds & organic linens</p>
+        </div>
+
+        <div class="category-box" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80');">
+            <h3>Decor & Accents</h3>
+            <p>Handcrafted vases & lighting</p>
+        </div>
+
+    </div>
+
+    <section id="products" class="products-container">
+        <h2 class="section-title">Signature Pieces</h2>
+        <div class="product-grid">
+            
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80" alt="Cloud Sofa" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Emerald Cloud Sofa</h3>
+                    <p class="product-price">$899.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&w=600&q=80" alt="Ceramic Vase" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Earth Tone Ceramic Vase</h3>
+                    <p class="product-price">$65.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=600&q=80" alt="Lounge Chair" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Oak Wood Lounge Chair</h3>
+                    <p class="product-price">$350.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80" alt="Pendant Light" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Brass Pendant Light</h3>
+                    <p class="product-price">$120.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>AURA.</h4>
+                <p style="color: #d1d1d1; max-width: 280px; line-height: 1.8;">Creating sustainable, beautiful spaces for modern homes since 2026. Inspired by nature, crafted for life.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Furniture</a></li>
+                    <li><a href="#">Decor</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Care Guide</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect With Us</h4>
+                <ul>
+                    <li><a href="#"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fa-brands fa-pinterest"></i> Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AURA Premium Lifestyle Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const cartButtons = document.querySelectorAll('.add-to-cart');
+        let cartCount = 0;
+        const cartDisplay = document.getElementById('cart-count');
+
+        cartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                cartCount++;
+                cartDisplay.textContent = cartCount;
+                
+                const originalText = button.textContent;
+                
+                button.textContent = 'Added to Cart ✓';
+                button.style.backgroundColor = '#C89F70'; 
+                button.style.color = '#1A1A1A';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.backgroundColor = ''; 
+                    button.style.color = '';
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
