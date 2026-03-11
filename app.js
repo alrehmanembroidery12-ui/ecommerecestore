@@ -1,53 +1,58 @@
-// ✅ 6 Premium Products (Now with Live Web Links & Balanced Grid)
+/**
+ * AURA Premium Lifestyle Store - Application Logic
+ * Fixed Version: 6 Matched Products with Live Links
+ */
+
+// 1. PRODUCT DATABASE (6 Signature Pieces)
 const products = [
     {
         id: 1,
-        title: "Radiance Vitamin C Serum",
-        price: 45.00,
-        image: "https://images.unsplash.com/photo-1580913209249-14a589574492?w=600&q=80",
+        title: "Signature No. 5 Perfume",
+        price: 120.00,
+        image: "https://images.unsplash.com/photo-1580913209249-14a589574492?w=800&q=80",
         badge: "Best Seller"
     },
     {
         id: 2,
-        title: "Deep Hydration Night Cream",
-        price: 68.00,
-        image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80",
-        badge: ""
+        title: "Astral Chronograph Watch",
+        price: 299.00,
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
+        badge: "Luxury"
     },
     {
         id: 3,
-        title: "Purifying Gentle Cleanser",
-        price: 32.00,
-        image: "https://images.unsplash.com/photo-1556228515-01ff1ee39a5b?w=600&q=80",
+        title: "Vantage DSLR Camera",
+        price: 899.00,
+        image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
         badge: "New"
     },
     {
         id: 4,
-        title: "Rosewater Balancing Toner",
-        price: 28.00,
-        image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80",
+        title: "Urban Explorer Glasses",
+        price: 150.00,
+        image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&q=80",
         badge: ""
     },
     {
         id: 5,
-        title: "Overnight Repair Mask",
-        price: 55.00,
-        image: "https://images.unsplash.com/photo-1590156221170-ce35ee64c733?w=600&q=80",
+        title: "Midnight Ember Ring",
+        price: 210.00,
+        image: "https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=800&q=80",
         badge: "Popular"
     },
     {
         id: 6,
-        title: "Botanical Eye Gel",
-        price: 40.00,
-        image: "https://images.unsplash.com/photo-1594125355919-f81216659ca4?w=600&q=80",
+        title: "Zenith Oud Wood Perfume",
+        price: 180.00,
+        image: "https://images.unsplash.com/photo-1594125355919-f81216659ca4?w=800&q=80",
         badge: ""
     }
 ];
 
-// Cart State
+// 2. STATE MANAGEMENT
 let cart = [];
 
-// DOM Elements
+// 3. DOM ELEMENTS
 const productsGrid = document.getElementById('productsGrid');
 const heroImage = document.getElementById('heroImage');
 const cartSidebar = document.getElementById('cartSidebar');
@@ -60,27 +65,23 @@ const cartCountElements = document.querySelectorAll('.cart-count');
 const toast = document.getElementById('toast');
 const header = document.querySelector('.header');
 
-// Initialize App
+// 4. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
-    // ✅ Set Hero Image with a Stable Live Link
+    // Set Hero Image (High Res)
     if (heroImage) {
         heroImage.src = "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1920&q=80";
     }
 
-    // Render Products
     renderProducts();
-
-    // Event Listeners
     setupEventListeners();
-
-    // Scroll Animations
     initScrollAnimations();
 });
 
-// Render Products Grid
+// 5. RENDER PRODUCTS GRID
 function renderProducts() {
     if (!productsGrid) return;
     productsGrid.innerHTML = '';
+    
     products.forEach((product, index) => {
         const productEl = document.createElement('div');
         productEl.className = 'product-card reveal';
@@ -107,12 +108,13 @@ function renderProducts() {
     });
 }
 
-// Setup Event Listeners
+// 6. EVENT LISTENERS
 function setupEventListeners() {
     cartToggleBtns.forEach(btn => btn.addEventListener('click', toggleCart));
     if (closeCartBtn) closeCartBtn.addEventListener('click', toggleCart);
     if (overlay) overlay.addEventListener('click', toggleCart);
 
+    // Dynamic Header Background
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
@@ -132,8 +134,8 @@ function setupEventListeners() {
     });
 }
 
-// Cart Logic
-function toggleCart() {
+// 7. CART CORE FUNCTIONS
+window.toggleCart = function() {
     cartSidebar.classList.toggle('open');
     overlay.classList.toggle('active');
     document.body.style.overflow = cartSidebar.classList.contains('open') ? 'hidden' : '';
@@ -152,11 +154,12 @@ window.addToCart = function(productId) {
     updateCartUI();
     showToast();
     
+    // Auto-open cart for UX feedback
     setTimeout(() => {
         if (!cartSidebar.classList.contains('open')) {
             toggleCart();
         }
-    }, 800);
+    }, 600);
 }
 
 window.removeFromCart = function(productId) {
@@ -177,9 +180,11 @@ window.updateQuantity = function(productId, change) {
 }
 
 function updateCartUI() {
+    // Update Counts
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCountElements.forEach(el => el.textContent = totalItems);
 
+    // Render Cart Items
     if (cart.length === 0) {
         cartItemsContainer.innerHTML = '<div class="empty-cart-msg">Your cart is currently empty.</div>';
     } else {
@@ -198,16 +203,20 @@ function updateCartUI() {
                         <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
                     </div>
                 </div>
-                <button class="remove-item" onclick="removeFromCart(${item.id})">x</button>
+                <button class="remove-item" onclick="removeFromCart(${item.id})">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
             `;
             cartItemsContainer.appendChild(itemEl);
         });
     }
 
+    // Update Subtotal
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     cartSubtotal.textContent = `$${total.toFixed(2)}`;
 }
 
+// 8. UTILITIES & ANIMATIONS
 function showToast() {
     if (toast) {
         toast.classList.add('show');
@@ -218,13 +227,14 @@ function showToast() {
 }
 
 function initScrollAnimations() {
+    const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
             }
         });
-    }, { threshold: 0.1 });
+    }, observerOptions);
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
