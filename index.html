@@ -82,14 +82,45 @@
     </section>
 
     <script>
-        const products = [
-            { id: 1, title: "Emerald Cloud Sofa", price: 899.00, image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80", badge: "Featured" },
-            { id: 2, title: "Earth Tone Ceramic Vase", price: 65.00, image: "https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?w=800&q=80", badge: "" },
-            { id: 3, title: "Oak Wood Lounge Chair", price: 350.00, image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80", badge: "Popular" },
-            { id: 4, title: "Brass Pendant Light", price: 120.00, image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80", badge: "" },
-            { id: 5, title: "Marble Coffee Table", price: 210.00, image: "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=800&q=80", badge: "New" },
-            { id: 6, title: "Noir Ceramic Lamp", price: 145.00, image: "https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=800&q=80", badge: "" }
-        ];
+    const products = [
+        { id: 1, title: "Emerald Cloud Sofa", price: 899.00, image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80", badge: "Featured" },
+        { id: 2, title: "Earth Tone Ceramic Vase", price: 65.00, image: "https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?w=800&q=80", badge: "" },
+        { id: 3, title: "Oak Wood Lounge Chair", price: 350.00, image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80", badge: "Popular" },
+        { id: 4, title: "Brass Pendant Light", price: 120.00, image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80", badge: "" },
+        // ✅ TABLE: Fixed (Now showing actual marble table)
+        { id: 5, title: "Marble Coffee Table", price: 210.00, image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=800&q=80", badge: "New" },
+        // ✅ LAMP: Fixed (Now showing actual ceramic lamp)
+        { id: 6, title: "Noir Ceramic Lamp", price: 145.00, image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&q=80", badge: "" }
+    ];
+
+    let cartCount = 0;
+    const grid = document.getElementById('productsGrid');
+    const countDisplay = document.getElementById('cart-count');
+
+    function render() {
+        if(!grid) return;
+        grid.innerHTML = products.map(p => `
+            <div class="product-card">
+                ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+                <img src="${p.image}" alt="${p.title}" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">${p.title}</h3>
+                    <p class="product-price">$${p.price.toFixed(2)}</p>
+                </div>
+                <button class="add-to-cart" onclick="add('${p.title}')">Add to Cart</button>
+            </div>
+        `).join('');
+    }
+
+    function add(name) {
+        cartCount++;
+        countDisplay.textContent = cartCount;
+        alert(name + " added to cart!");
+    }
+
+    render();
+</script>
+        
 
         let cartCount = 0;
         const grid = document.getElementById('productsGrid');
@@ -119,3 +150,4 @@
     </script>
 </body>
 </html>
+
